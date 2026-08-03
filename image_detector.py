@@ -6,3 +6,8 @@ import cv2
 photo=cv2.imread("3586.jpg") ## reads the photo path
 cv2.imshow("my window", photo)## shows the photo and assigns the name
 ## of the window and provides the photo to be shown
+
+## assigns the position of the window on the screen
+cv2.moveWindow("my window", 100, 100)
+
+
