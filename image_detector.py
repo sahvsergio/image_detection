@@ -5,14 +5,15 @@ from ultralytics import YOLO
 
 ##create the model using the yolov8n.pt weights
 model=YOLO("yolov8n.pt")
-face_model=YOLO("yolov8n-face.pt")
+face_model=YOLO("yolov8m-face.pt")
 # create an instance of the photo 
 
-photo=cv2.imread("3586.jpg") ## reads the photo path
+photo=cv2.imread("Gemini_Generated_Image_6.png") ## reads the photo path
 ## Add the photo to the model for detection
 result=model(photo)
+face_result=face_model(photo)
 print(result)    
-cv2.imshow("my window", result[0].plot())## shows the photo and assigns the name
+cv2.imshow("my window", face_result[0].plot())## shows the photo and assigns the name
 ## of the window and provides the photo to be shown
 
 ## assigns the position of the window on the screen
