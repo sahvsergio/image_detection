@@ -14,7 +14,12 @@ face_model=YOLO("yolov8m-face.pt")
 # create a while loop to continuously read frames from the camera
 while cv2.waitKey(1)!= ord("x"):
     _,frame=cap.read() ## read the frames from the camera
-    cv2.imshow("my window", frame)## shows the photo and assigns the name
+
+    result=model(frame)
+    face_result=face_model(frame)
+    object_detection=result[0].plot()
+    face=face_result[0].plot(img=object_detection)
+    cv2.imshow("my window", face)## shows the photo and assigns the name
     ## of the window and provides the photo to be shown
     # ## assigns the position of the window on the screen
     cv2.moveWindow("my window", 100, 100)
