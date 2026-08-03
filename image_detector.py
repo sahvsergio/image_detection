@@ -5,7 +5,7 @@ from ultralytics import YOLO
 
 ##create the model using the yolov8n.pt weights
 model=YOLO("yolov8n.pt")
-
+face_model=YOLO("yolov8n-face.pt")
 # create an instance of the photo 
 
 photo=cv2.imread("3586.jpg") ## reads the photo path
@@ -20,7 +20,7 @@ cv2.moveWindow("my window", 100, 100)
 
 
 # provides wait time for the window to be displayed before it is closed 
-cv2.waitKey(5000)
+cv2.waitKey(500000)
 
 ## Destroy all the windows created by OpenCV
 cv2.destroyAllWindows()
