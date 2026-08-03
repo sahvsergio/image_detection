@@ -6,6 +6,11 @@ from ultralytics import YOLO
 cap= cv2.VideoCapture(0) ## 0 is the default camera, if you have multiple cameras, 
 #you can change the index to 1, 2, etc.
 
+
+
+## add models for object detection and face detection
+model=YOLO("yolov8n.pt")
+face_model=YOLO("yolov8m-face.pt")
 # create a while loop to continuously read frames from the camera
 while cv2.waitKey(1)!= ord("x"):
     _,frame=cap.read() ## read the frames from the camera
