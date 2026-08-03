@@ -11,3 +11,5 @@ cv2.imshow("my window", photo)## shows the photo and assigns the name
 cv2.moveWindow("my window", 100, 100)
 
 
+# provides wait time for the window to be displayed before it is closed 
+cv2.waitKey(5000)
