@@ -1,5 +1,6 @@
 # import the necessary libraries
 import cv2
+from ultralytics import YOLO
 
 # create an instance of the photo 
 
