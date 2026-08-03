@@ -8,12 +8,18 @@ model=YOLO("yolov8n.pt")
 face_model=YOLO("yolov8m-face.pt")
 # create an instance of the photo 
 
-photo=cv2.imread("Gemini_Generated_Image_6.png") ## reads the photo path
+photo=cv2.imread("Gemini_Generated_Image5_.png") ## reads the photo path
 ## Add the photo to the model for detection
 result=model(photo)
 face_result=face_model(photo)
+object_detection=result[0].plot()
+face=face_result[0].plot(img=object_detection)
+## detect objects
+
+
 print(result)    
-cv2.imshow("my window", face_result[0].plot())## shows the photo and assigns the name
+
+cv2.imshow("my window", face)## shows the photo and assigns the name
 ## of the window and provides the photo to be shown
 
 ## assigns the position of the window on the screen
