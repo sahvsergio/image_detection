@@ -15,8 +15,8 @@ face_model=YOLO("yolov8m-face.pt")
 while cv2.waitKey(1)!= ord("x"):
     _,frame=cap.read() ## read the frames from the camera
 
-    result=model(frame)
-    face_result=face_model(frame)
+    result=model(frame, verbose=False)
+    face_result=face_model(frame, verbose=False)
     object_detection=result[0].plot()
     face=face_result[0].plot(img=object_detection)
     cv2.imshow("my window", face)## shows the photo and assigns the name
