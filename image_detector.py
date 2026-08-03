@@ -2,6 +2,10 @@
 import cv2
 from ultralytics import YOLO
 
+
+##create the model using the yolov8n.pt weights
+model=YOLO("yolov8n.pt")
+
 # create an instance of the photo 
 
 photo=cv2.imread("3586.jpg") ## reads the photo path
