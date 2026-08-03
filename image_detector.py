@@ -9,7 +9,10 @@ model=YOLO("yolov8n.pt")
 # create an instance of the photo 
 
 photo=cv2.imread("3586.jpg") ## reads the photo path
-cv2.imshow("my window", photo)## shows the photo and assigns the name
+## Add the photo to the model for detection
+result=model(photo)
+print(result)    
+"""cv2.imshow("my window", photo)## shows the photo and assigns the name
 ## of the window and provides the photo to be shown
 
 ## assigns the position of the window on the screen
@@ -21,3 +24,4 @@ cv2.waitKey(5000)
 
 ## Destroy all the windows created by OpenCV
 cv2.destroyAllWindows()
+"""
