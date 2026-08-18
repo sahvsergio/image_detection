@@ -27,7 +27,7 @@ cv2.moveWindow("my window", 100, 100)
 
 
 # provides wait time for the window to be displayed before it is closed 
-cv2.waitKey(500000)
+cv2.waitKey(500)
 
 ## Destroy all the windows created by OpenCV
 cv2.destroyAllWindows()
