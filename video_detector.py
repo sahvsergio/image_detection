@@ -1,32 +1,37 @@
+# import the necessary libraries
+import os 
 import cv2
+import torch
 from ultralytics import YOLO
 
+num_threads=os.cpu_count()
+# set the number of threads for PyTorch to use  
+torch.set_num_threads(num_threads)
+print("Running on CPU with {} threads".format(num_threads))
+# 4. Execute inference on CPU utilizing all 8 threads
 
-## Create a vide capture
-cap= cv2.VideoCapture(0) ## 0 is the default camera, if you have multiple cameras, 
-#you can change the index to 1, 2, etc.
 
-
-
-## add models for object detection and face detection
+##create the model using the yolov8n.pt weights
 model=YOLO("yolov8n.pt")
 face_model=YOLO("yolov8m-face.pt")
-# create a while loop to continuously read frames from the camera
-while cv2.waitKey(1)!= ord("x"):
-    _,frame=cap.read() ## read the frames from the camera
+cap=cv2.VideoCapture(0) ## creates a video capture object to capture the video from the webcam
 
-    result=model(frame, verbose=False)
-    face_result=face_model(frame, verbose=False)
+while cv2.waitKey(1) != ord("x"):
+    # read each frame from the webcam
+    _,frame=cap.read()
+    result=model(frame)
+    face_result=face_model(frame)
     object_detection=result[0].plot()
     face=face_result[0].plot(img=object_detection)
-    cv2.imshow("my window", face)## shows the photo and assigns the name
-    ## of the window and provides the photo to be shown
-    # ## assigns the position of the window on the screen
-    cv2.moveWindow("my window", 100, 100)
+    results = model.predict(source=face, device="cpu", verbose=False)
+    annotated_frame=results[0].plot()
+    cv2.imshow('my window',results[0].plot()) ## shows the photo and assigns the name of the window and provides the photo to be shown
+    cv2.moveWindow("my window",100,100)
 
 
-# provides wait time for the window to be displayed before it is closed 
-cv2.waitKey(500000)
-cap.release() ## release the camera
-## Destroy all the windows created by OpenCV
+
+cv2.waitKey(5000)
+cap.release()
 cv2.destroyAllWindows()
+
+
