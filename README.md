@@ -3,3 +3,5 @@ https://github.com/MariyaSha/SimpleFaceDetection
 https://github.com/akanametov/yolo-face
 https://www.geeksforgeeks.org/computer-vision/object-detection-with-yolo-and-opencv/
 https://www.youtube.com/watch?v=pQvkoaevVMk
+
+https://www.youtube.com/watch?v=Z2Ojl7m3JXk
