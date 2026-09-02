@@ -20,6 +20,7 @@ files =os.listdir(folder)
 
 #load the face detection model
 face_model=YOLO("yolov8m-face.pt")  
+face_recognizer=cv2.face.LBPHFaceRecognizer_create()  # create the face recognizer model
 
 faces=[]
 # load each file with openCV
