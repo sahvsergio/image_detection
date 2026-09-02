@@ -6,3 +6,12 @@ https://www.youtube.com/watch?v=pQvkoaevVMk
 
 https://www.youtube.com/watch?v=Z2Ojl7m3JXk
 https://github.com/akanametov/yolo-face
+
+cv2.putText(image,
+                text,
+                (x,y),
+                font,
+                fontsize,
+                color,
+                thickness
+                )
