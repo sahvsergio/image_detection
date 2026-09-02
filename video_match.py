@@ -32,6 +32,12 @@ for file in files:
     #process the image, meaning drawing a box over the face and displaying the result
     processed_image=face_result[0].plot()
 
+#print what lives inside the face_result[0]
+print(f'looking inside the face result: {face_result[0]}')
+print(f'flooking inside the boxes:{face_result[0].boxes}')
+print(f'flooking inside the boxes coordinates xyxy  :{face_result[0].boxes.xyxy}')
+
+
 
 
 #test code to verify images are being read correctly
