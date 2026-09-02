@@ -32,8 +32,12 @@ for file in files:
     #process the image, meaning drawing a box over the face and displaying the result
     processed_image=face_result[0].plot()
     #gather the coodinates of the face detected in the photo
-    left, top, right, bottom=face_result[0].boxes.xyxy[0]#we use 0 for the one and only face in the photo
+    left, top, right, bottom=face_result[0].boxes.xyxy[0].int()
     
+    #we use 0 for the one and only face in the photo
+    # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
+    face=photo[top:bottom, left:right]
+
 
 
 #print what lives inside the face_result[0]
@@ -46,5 +50,8 @@ print(f'flooking inside the boxes coordinates xyxy  :{face_result[0].boxes.xyxy}
 
 #test code to verify images are being read correctly
 Image.fromarray(photo[:,:,::-1]).show()
+
 Image.fromarray(processed_image[:,:,::-1]).show()
+Image.fromarray(face[:,:,::-1]).show()
+
 
