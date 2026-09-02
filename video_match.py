@@ -18,6 +18,10 @@ folder= "faces/Mariya"
 #list all files inside the designated faces folder
 files =os.listdir(folder)
 
+#load the face detection model
+face_model=YOLO("yolov8m-face.pt")  
+
+
 # load each file with openCV
 
 for file in files:
