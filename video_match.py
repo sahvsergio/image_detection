@@ -63,4 +63,25 @@ print(f'flooking inside the boxes coordinates xyxy  :{face_result[0].boxes.xyxy}
 #Image.fromarray(face[:,:,::-1]).show()
 Image.fromarray(faces[0]).show()
 
+# catch it on the the screen
+cap=cv2.VideoCapture(0) ## creates a video capture object to capture the video from the webcam
+#read the model that is already familiar with the faces we trained it on
+face_recognizer.read("face_recognizer.yml") # load the trained model from the file.
 
+
+while cv2.waitKey(1) != ord("x"):
+   
+    
+    ret, frame=cap.read()
+    face_result=face_model(frame, verbose=False)# 
+    processed_feed=face_result[0].plot()
+    left, top, right, bottom=face_result[0].boxes.xyxy[0].int()
+    #we use 0 for the one and only face in the photo
+    # # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
+    face=frame[top:bottom, left:right]
+    # turn into a gray color for the face recognizer to work with and reassign the face variable to the new gray image
+    face=cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+    #resize the face to a standard size, so the recognizer can work with it
+    face=cv2.resize(face, (200,200))
+
+    
