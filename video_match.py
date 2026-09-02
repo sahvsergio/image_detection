@@ -75,13 +75,25 @@ while cv2.waitKey(1) != ord("x"):
     ret, frame=cap.read()
     face_result=face_model(frame, verbose=False)# 
     processed_feed=face_result[0].plot()
-    left, top, right, bottom=face_result[0].boxes.xyxy[0].int()
-    #we use 0 for the one and only face in the photo
-    # # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
-    face=frame[top:bottom, left:right]
-    # turn into a gray color for the face recognizer to work with and reassign the face variable to the new gray image
-    face=cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
-    #resize the face to a standard size, so the recognizer can work with it
-    face=cv2.resize(face, (200,200))
-
+    for box in face_result[0].boxes.xyxy:
+        left, top, right, bottom=face_result[0].box.int()
+        #we use 0 for the one and only face in the photo
+        # # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
+        face=frame[top:bottom, left:right]
+        # turn into a gray color for the face recognizer to work with and reassign the face variable to the new gray image
+        face=cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+        #resize the face to a standard size, so the recognizer can work with it
+        face=cv2.resize(face, (200,200))
+        pred_label, distance=face_recognizer.predict(face)
+        cv2.putText(
+            processed_feed,
+            str(pred_label),
+            (int(left),int(bottom+20)),
+            0,
+            0.8,
+            (255,255,255),
+            2
+            )
+        cv2.imshow("my window", processed_feed)
+                
     
