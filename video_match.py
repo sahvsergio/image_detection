@@ -65,6 +65,9 @@ Image.fromarray(faces[0]).show()
 
 # catch it on the the screen
 cap=cv2.VideoCapture(0) ## creates a video capture object to capture the video from the webcam
+#add a list of names, rather than just numbers, so we can see the names of the people being recognized
+names={0:'Mariya',1:'Mario'} # if we had more than one person, we would add them here with a different number for each person
+max_distance=70 # this is the maximum distance for a match to be considered valid, if the distance is greater than this, it will be considered a non-match
 #read the model that is already familiar with the faces we trained it on
 face_recognizer.read("face_recognizer.yml") # load the trained model from the file.
 
@@ -76,7 +79,7 @@ while cv2.waitKey(1) != ord("x"):
     face_result=face_model(frame, verbose=False)# 
     processed_feed=face_result[0].plot()
     for box in face_result[0].boxes.xyxy:
-        left, top, right, bottom=face_result[0].box.int()
+        left, top, right, bottom=box.int()
         #we use 0 for the one and only face in the photo
         # # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
         face=frame[top:bottom, left:right]
@@ -85,15 +88,23 @@ while cv2.waitKey(1) != ord("x"):
         #resize the face to a standard size, so the recognizer can work with it
         face=cv2.resize(face, (200,200))
         pred_label, distance=face_recognizer.predict(face)
+        if distance>max_distance:
+
+            name="unknown"
+        else:
+            name=names[pred_label]
         cv2.putText(
-            processed_feed,
-            str(pred_label),
-            (int(left),int(bottom+20)),
-            0,
-            0.8,
-            (255,255,255),
-            2
-            )
-        cv2.imshow("my window", processed_feed)
+        processed_feed,
+        name+"|| "+str(int(distance)),
+        (int(left),int(bottom+20)),
+        0,
+        0.8,
+        (255,255,255),
+        2
+        )
+    cv2.imshow("my window", processed_feed)
                 
-    
+# Release the hardware back to the operating system    
+cap.release()
+# Close all OpenCV windows to clear the screen
+cv2.destroyAllWindows()
