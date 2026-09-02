@@ -38,6 +38,9 @@ for file in files:
     #we use 0 for the one and only face in the photo
     # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
     face=photo[top:bottom, left:right]
+    # turn into a gray color for the face recognizer to work with and reassign the face variable to the new gray image
+    
+    face=cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
     #store  each face in a list, so we can use it later.
     faces.append(face)
 
