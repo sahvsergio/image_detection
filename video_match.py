@@ -49,7 +49,7 @@ for file in files:
     faces.append(face)
     labels.append(0)# we use 0 for the one and only face in the photo, if we had more than one person, we would use different numbers for each person
 
-face_recognizer.train(faces,labels) # train the recognizer with the faces and labels we have collected  
+face_recognizer.train(faces,np.array(labels)) # train the recognizer with the faces and labels we have collected  
 face_recognizer.write("face_recognizer.yml") # save the trained model to a file, so we can use it later
 
 #print what lives inside the face_result[0]
