@@ -5,3 +5,4 @@ https://www.geeksforgeeks.org/computer-vision/object-detection-with-yolo-and-ope
 https://www.youtube.com/watch?v=pQvkoaevVMk
 
 https://www.youtube.com/watch?v=Z2Ojl7m3JXk
+https://github.com/akanametov/yolo-face
