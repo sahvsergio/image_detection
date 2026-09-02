@@ -21,7 +21,7 @@ files =os.listdir(folder)
 #load the face detection model
 face_model=YOLO("yolov8m-face.pt")  
 
-
+faces=[]
 # load each file with openCV
 
 for file in files:
@@ -37,6 +37,8 @@ for file in files:
     #we use 0 for the one and only face in the photo
     # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
     face=photo[top:bottom, left:right]
+    #store  each face in a list, so we can use it later.
+    faces.append(face)
 
 
 
