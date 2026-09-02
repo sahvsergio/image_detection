@@ -10,20 +10,23 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 from PIL import Image
+faces=[]
+labels=[]
 
-
-# get the folder where the training images are    
-folder= "faces/Mariya"
-
-#list all files inside the designated faces folder
-files =os.listdir(folder)
 
 #load the face detection model
 face_model=YOLO("yolov8m-face.pt")  
 face_recognizer=cv2.face.LBPHFaceRecognizer_create()  # create the face recognizer model
 
-faces=[]
-labels=[]
+# get the folder where the training images are    
+folder= "faces/Mariya"
+folders={0:'faces/Mariya',1:'faces/Mario'} # if we had more than one person, we would add them here with a different number for each person
+
+
+#list all files inside the designated faces folder
+files =os.listdir(folder)
+
+
 # load each file with openCV
 
 for file in files:
