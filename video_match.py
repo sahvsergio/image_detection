@@ -23,6 +23,7 @@ face_model=YOLO("yolov8m-face.pt")
 face_recognizer=cv2.face.LBPHFaceRecognizer_create()  # create the face recognizer model
 
 faces=[]
+labels=[]
 # load each file with openCV
 
 for file in files:
@@ -46,8 +47,10 @@ for file in files:
     face=cv2.resize(face, (200,200))
     #store  each face in a list, so we can use it later.
     faces.append(face)
+    labels.append(0)# we use 0 for the one and only face in the photo, if we had more than one person, we would use different numbers for each person
 
-
+face_recognizer.train(faces,labels) # train the recognizer with the faces and labels we have collected  
+face_recognizer.write("face_recognizer.yml") # save the trained model to a file, so we can use it later
 
 #print what lives inside the face_result[0]
 print(f'looking inside the face result: {face_result[0]}')
