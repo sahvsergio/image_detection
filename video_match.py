@@ -31,6 +31,10 @@ for file in files:
     face_result=face_model(photo, verbose=False)# this returns their exact lcoation and some other stuff
     #process the image, meaning drawing a box over the face and displaying the result
     processed_image=face_result[0].plot()
+    #gather the coodinates of the face detected in the photo
+    left, top, right, bottom=face_result[0].boxes.xyxy[0]#we use 0 for the one and only face in the photo
+    
+
 
 #print what lives inside the face_result[0]
 print(f'looking inside the face result: {face_result[0]}')
