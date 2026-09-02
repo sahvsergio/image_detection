@@ -27,7 +27,14 @@ face_model=YOLO("yolov8m-face.pt")
 for file in files:
 
     photo=cv2.imread(folder+"/"+file)
+    #pass photo into the model one at a time
+    face_result=face_model(photo, verbose=False)# this returns their exact lcoation and some other stuff
+    #process the image, meaning drawing a box over the face and displaying the result
+    processed_image=face_result[0].plot()
+
+
 
 #test code to verify images are being read correctly
 Image.fromarray(photo[:,:,::-1]).show()
+Image.fromarray(processed_image[:,:,::-1]).show()
 
