@@ -39,8 +39,11 @@ for file in files:
     # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
     face=photo[top:bottom, left:right]
     # turn into a gray color for the face recognizer to work with and reassign the face variable to the new gray image
-    
+
     face=cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+
+    #resize the face to a standard size, so the recognizer can work with it
+    face=cv2.resize(face, (200,200))
     #store  each face in a list, so we can use it later.
     faces.append(face)
 
@@ -55,9 +58,10 @@ print(f'flooking inside the boxes coordinates xyxy  :{face_result[0].boxes.xyxy}
 
 
 #test code to verify images are being read correctly
-Image.fromarray(photo[:,:,::-1]).show()
+#Image.fromarray(photo[:,:,::-1]).show()
 
-Image.fromarray(processed_image[:,:,::-1]).show()
-Image.fromarray(face[:,:,::-1]).show()
+#Image.fromarray(processed_image[:,:,::-1]).show()
+#Image.fromarray(face[:,:,::-1]).show()
+Image.fromarray(faces[0]).show()
 
 
