@@ -19,38 +19,31 @@ face_model=YOLO("yolov8m-face.pt")
 face_recognizer=cv2.face.LBPHFaceRecognizer_create()  # create the face recognizer model
 
 # get the folder where the training images are    
-folder= "faces/Mariya"
+
 folders={0:'faces/Mariya',1:'faces/Mario'} # if we had more than one person, we would add them here with a different number for each person
-
-
-#list all files inside the designated faces folder
-files =os.listdir(folder)
-
-
-# load each file with openCV
-
-for file in files:
-
-    photo=cv2.imread(folder+"/"+file)
-    #pass photo into the model one at a time
-    face_result=face_model(photo, verbose=False)# this returns their exact lcoation and some other stuff
-    #process the image, meaning drawing a box over the face and displaying the result
-    processed_image=face_result[0].plot()
-    #gather the coodinates of the face detected in the photo
-    left, top, right, bottom=face_result[0].boxes.xyxy[0].int()
-    
-    #we use 0 for the one and only face in the photo
-    # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
-    face=photo[top:bottom, left:right]
-    # turn into a gray color for the face recognizer to work with and reassign the face variable to the new gray image
-
-    face=cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
-
-    #resize the face to a standard size, so the recognizer can work with it
-    face=cv2.resize(face, (200,200))
-    #store  each face in a list, so we can use it later.
-    faces.append(face)
-    labels.append(0)# we use 0 for the one and only face in the photo, if we had more than one person, we would use different numbers for each person
+#iterate over the dictionary of folders, where the key is the label and the value is the folder path
+for label, folder in folders.items():
+    #list all files inside the designated faces folder
+    files =os.listdir(folder)
+    # load each file with openCV
+    for file in files:
+        photo=cv2.imread(folder+"/"+file)
+        #pass photo into the model one at a time
+        face_result=face_model(photo, verbose=False)# this returns their exact lcoation and some other stuff
+        #process the image, meaning drawing a box over the face and displaying the result
+        processed_image=face_result[0].plot()
+        #gather the coodinates of the face detected in the photo
+        left, top, right, bottom=face_result[0].boxes.xyxy[0].int()
+        #we use 0 for the one and only face in the photo
+        # # we use into , as there are no decimal points in pixels, and we need to convert the float values to integers
+        face=photo[top:bottom, left:right]
+        # turn into a gray color for the face recognizer to work with and reassign the face variable to the new gray image
+        face=cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+        #resize the face to a standard size, so the recognizer can work with it
+        face=cv2.resize(face, (200,200))
+        #store  each face in a list, so we can use it later.
+        faces.append(face)
+        labels.append(label)# we use label now since we pull it form the dictionary of labels
 
 face_recognizer.train(faces,np.array(labels)) # train the recognizer with the faces and labels we have collected  
 face_recognizer.write("face_recognizer.yml") # save the trained model to a file, so we can use it later
