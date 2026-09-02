@@ -10,3 +10,10 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 from PIL import Image
+
+
+# get the folder where the training images are    
+folder= "faces/Mariya"
+
+#list all files inside the designated faces folder
+files =os.listdir(folder)
